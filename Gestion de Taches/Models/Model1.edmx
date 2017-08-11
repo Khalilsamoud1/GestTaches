@@ -1,0 +1,277 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="taches_dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="DEPARTEMENT">
+          <Key>
+            <PropertyRef Name="ID_DEPARTEMENT" />
+          </Key>
+          <Property Name="ID_DEPARTEMENT" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOM_DEPARTEMENT" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PERSONNE">
+          <Key>
+            <PropertyRef Name="CIN" />
+          </Key>
+          <Property Name="CIN" Type="int" Nullable="false" />
+          <Property Name="ID_DEPARTEMENT" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="ID_SERV" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="NOM" Type="varchar" MaxLength="30" />
+          <Property Name="PRENOM" Type="varchar" MaxLength="30" />
+          <Property Name="AGE" Type="int" />
+          <Property Name="ADRESSE" Type="varchar" MaxLength="200" />
+          <Property Name="TEL" Type="int" />
+          <Property Name="MAIL" Type="varchar" MaxLength="50" />
+          <Property Name="DATE_NAIS" Type="date" />
+        </EntityType>
+        <EntityType Name="SERVICE">
+          <Key>
+            <PropertyRef Name="ID_SERV" />
+          </Key>
+          <Property Name="ID_SERV" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOM_SERVICE" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TACHE">
+          <Key>
+            <PropertyRef Name="ID_TACHE" />
+          </Key>
+          <Property Name="ID_TACHE" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CIN" Type="int" />
+          <Property Name="DATE_DEBUT" Type="date" />
+          <Property Name="DATE_FIN" Type="date" />
+          <Property Name="DESCIPTION" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <Association Name="FK_PERSONNE_REFERENCE_DEPARTEM">
+          <End Role="DEPARTEMENT" Type="Self.DEPARTEMENT" Multiplicity="0..1" />
+          <End Role="PERSONNE" Type="Self.PERSONNE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DEPARTEMENT">
+              <PropertyRef Name="ID_DEPARTEMENT" />
+            </Principal>
+            <Dependent Role="PERSONNE">
+              <PropertyRef Name="ID_DEPARTEMENT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PERSONNE_REFERENCE_SERVICE">
+          <End Role="SERVICE" Type="Self.SERVICE" Multiplicity="0..1" />
+          <End Role="PERSONNE" Type="Self.PERSONNE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SERVICE">
+              <PropertyRef Name="ID_SERV" />
+            </Principal>
+            <Dependent Role="PERSONNE">
+              <PropertyRef Name="ID_SERV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TACHE_REFERENCE_PERSONNE">
+          <End Role="PERSONNE" Type="Self.PERSONNE" Multiplicity="0..1" />
+          <End Role="TACHE" Type="Self.TACHE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERSONNE">
+              <PropertyRef Name="CIN" />
+            </Principal>
+            <Dependent Role="TACHE">
+              <PropertyRef Name="CIN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="taches_dbModelStoreContainer">
+          <EntitySet Name="DEPARTEMENT" EntityType="Self.DEPARTEMENT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PERSONNE" EntityType="Self.PERSONNE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SERVICE" EntityType="Self.SERVICE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TACHE" EntityType="Self.TACHE" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_PERSONNE_REFERENCE_DEPARTEM" Association="Self.FK_PERSONNE_REFERENCE_DEPARTEM">
+            <End Role="DEPARTEMENT" EntitySet="DEPARTEMENT" />
+            <End Role="PERSONNE" EntitySet="PERSONNE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PERSONNE_REFERENCE_SERVICE" Association="Self.FK_PERSONNE_REFERENCE_SERVICE">
+            <End Role="SERVICE" EntitySet="SERVICE" />
+            <End Role="PERSONNE" EntitySet="PERSONNE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TACHE_REFERENCE_PERSONNE" Association="Self.FK_TACHE_REFERENCE_PERSONNE">
+            <End Role="PERSONNE" EntitySet="PERSONNE" />
+            <End Role="TACHE" EntitySet="TACHE" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="taches_dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="DEPARTEMENT">
+          <Key>
+            <PropertyRef Name="ID_DEPARTEMENT" />
+          </Key>
+          <Property Name="ID_DEPARTEMENT" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOM_DEPARTEMENT" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="PERSONNEs" Relationship="Self.FK_PERSONNE_REFERENCE_DEPARTEM" FromRole="DEPARTEMENT" ToRole="PERSONNE" />
+        </EntityType>
+        <EntityType Name="PERSONNE">
+          <Key>
+            <PropertyRef Name="CIN" />
+          </Key>
+          <Property Name="CIN" Type="Int32" Nullable="false" />
+          <Property Name="ID_DEPARTEMENT" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ID_SERV" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="NOM" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="PRENOM" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="AGE" Type="Int32" />
+          <Property Name="ADRESSE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="TEL" Type="Int32" />
+          <Property Name="MAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DATE_NAIS" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="DEPARTEMENT" Relationship="Self.FK_PERSONNE_REFERENCE_DEPARTEM" FromRole="PERSONNE" ToRole="DEPARTEMENT" />
+          <NavigationProperty Name="SERVICE" Relationship="Self.FK_PERSONNE_REFERENCE_SERVICE" FromRole="PERSONNE" ToRole="SERVICE" />
+          <NavigationProperty Name="TACHEs" Relationship="Self.FK_TACHE_REFERENCE_PERSONNE" FromRole="PERSONNE" ToRole="TACHE" />
+        </EntityType>
+        <EntityType Name="SERVICE">
+          <Key>
+            <PropertyRef Name="ID_SERV" />
+          </Key>
+          <Property Name="ID_SERV" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOM_SERVICE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="PERSONNEs" Relationship="Self.FK_PERSONNE_REFERENCE_SERVICE" FromRole="SERVICE" ToRole="PERSONNE" />
+        </EntityType>
+        <EntityType Name="TACHE">
+          <Key>
+            <PropertyRef Name="ID_TACHE" />
+          </Key>
+          <Property Name="ID_TACHE" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CIN" Type="Int32" />
+          <Property Name="DATE_DEBUT" Type="DateTime" Precision="0" />
+          <Property Name="DATE_FIN" Type="DateTime" Precision="0" />
+          <Property Name="DESCIPTION" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PERSONNE" Relationship="Self.FK_TACHE_REFERENCE_PERSONNE" FromRole="TACHE" ToRole="PERSONNE" />
+        </EntityType>
+        <Association Name="FK_PERSONNE_REFERENCE_DEPARTEM">
+          <End Role="DEPARTEMENT" Type="Self.DEPARTEMENT" Multiplicity="0..1" />
+          <End Role="PERSONNE" Type="Self.PERSONNE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DEPARTEMENT">
+              <PropertyRef Name="ID_DEPARTEMENT" />
+            </Principal>
+            <Dependent Role="PERSONNE">
+              <PropertyRef Name="ID_DEPARTEMENT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PERSONNE_REFERENCE_SERVICE">
+          <End Role="SERVICE" Type="Self.SERVICE" Multiplicity="0..1" />
+          <End Role="PERSONNE" Type="Self.PERSONNE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SERVICE">
+              <PropertyRef Name="ID_SERV" />
+            </Principal>
+            <Dependent Role="PERSONNE">
+              <PropertyRef Name="ID_SERV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TACHE_REFERENCE_PERSONNE">
+          <End Role="PERSONNE" Type="Self.PERSONNE" Multiplicity="0..1" />
+          <End Role="TACHE" Type="Self.TACHE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERSONNE">
+              <PropertyRef Name="CIN" />
+            </Principal>
+            <Dependent Role="TACHE">
+              <PropertyRef Name="CIN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="taches_dbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DEPARTEMENTs" EntityType="Self.DEPARTEMENT" />
+          <EntitySet Name="PERSONNEs" EntityType="Self.PERSONNE" />
+          <EntitySet Name="SERVICEs" EntityType="Self.SERVICE" />
+          <EntitySet Name="TACHEs" EntityType="Self.TACHE" />
+          <AssociationSet Name="FK_PERSONNE_REFERENCE_DEPARTEM" Association="Self.FK_PERSONNE_REFERENCE_DEPARTEM">
+            <End Role="DEPARTEMENT" EntitySet="DEPARTEMENTs" />
+            <End Role="PERSONNE" EntitySet="PERSONNEs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PERSONNE_REFERENCE_SERVICE" Association="Self.FK_PERSONNE_REFERENCE_SERVICE">
+            <End Role="SERVICE" EntitySet="SERVICEs" />
+            <End Role="PERSONNE" EntitySet="PERSONNEs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TACHE_REFERENCE_PERSONNE" Association="Self.FK_TACHE_REFERENCE_PERSONNE">
+            <End Role="PERSONNE" EntitySet="PERSONNEs" />
+            <End Role="TACHE" EntitySet="TACHEs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="taches_dbModelStoreContainer" CdmEntityContainer="taches_dbEntities">
+          <EntitySetMapping Name="DEPARTEMENTs">
+            <EntityTypeMapping TypeName="taches_dbModel.DEPARTEMENT">
+              <MappingFragment StoreEntitySet="DEPARTEMENT">
+                <ScalarProperty Name="ID_DEPARTEMENT" ColumnName="ID_DEPARTEMENT" />
+                <ScalarProperty Name="NOM_DEPARTEMENT" ColumnName="NOM_DEPARTEMENT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PERSONNEs">
+            <EntityTypeMapping TypeName="taches_dbModel.PERSONNE">
+              <MappingFragment StoreEntitySet="PERSONNE">
+                <ScalarProperty Name="CIN" ColumnName="CIN" />
+                <ScalarProperty Name="ID_DEPARTEMENT" ColumnName="ID_DEPARTEMENT" />
+                <ScalarProperty Name="ID_SERV" ColumnName="ID_SERV" />
+                <ScalarProperty Name="NOM" ColumnName="NOM" />
+                <ScalarProperty Name="PRENOM" ColumnName="PRENOM" />
+                <ScalarProperty Name="AGE" ColumnName="AGE" />
+                <ScalarProperty Name="ADRESSE" ColumnName="ADRESSE" />
+                <ScalarProperty Name="TEL" ColumnName="TEL" />
+                <ScalarProperty Name="MAIL" ColumnName="MAIL" />
+                <ScalarProperty Name="DATE_NAIS" ColumnName="DATE_NAIS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SERVICEs">
+            <EntityTypeMapping TypeName="taches_dbModel.SERVICE">
+              <MappingFragment StoreEntitySet="SERVICE">
+                <ScalarProperty Name="ID_SERV" ColumnName="ID_SERV" />
+                <ScalarProperty Name="NOM_SERVICE" ColumnName="NOM_SERVICE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TACHEs">
+            <EntityTypeMapping TypeName="taches_dbModel.TACHE">
+              <MappingFragment StoreEntitySet="TACHE">
+                <ScalarProperty Name="ID_TACHE" ColumnName="ID_TACHE" />
+                <ScalarProperty Name="CIN" ColumnName="CIN" />
+                <ScalarProperty Name="DATE_DEBUT" ColumnName="DATE_DEBUT" />
+                <ScalarProperty Name="DATE_FIN" ColumnName="DATE_FIN" />
+                <ScalarProperty Name="DESCIPTION" ColumnName="DESCIPTION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

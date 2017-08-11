@@ -1,0 +1,52 @@
+﻿
+@model IEnumerable<Gestion_de_Taches.Models.TACHE>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<table><tr><td><img src="~/images/Voucher.png" /></td><td><h2>Gestion des Taches</h2></td></tr></table>
+
+
+<p>
+    @Html.ActionLink("Nouvelle Tache", "Create")
+</p>
+<table class="table" >
+    <tr style="background-color:black;color:white;">
+        <th>
+            Date de début
+        </th>
+        <th>
+Date de Fin       
+         </th>
+        <th>
+Description        </th>
+        <th>
+Nom
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DATE_DEBUT)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DATE_FIN)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DESCIPTION)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PERSONNE.NOM)
+        </td>
+        <td>
+            @Html.ActionLink("Modifier", "Edit", new { id=item.ID_TACHE }) |
+            @Html.ActionLink("Afficher", "Details", new { id=item.ID_TACHE }) |
+            @Html.ActionLink("Supprimer", "Delete", new { id=item.ID_TACHE })
+        </td>
+    </tr>
+}
+
+</table>

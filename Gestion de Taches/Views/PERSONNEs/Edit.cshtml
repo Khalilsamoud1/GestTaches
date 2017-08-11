@@ -1,0 +1,66 @@
+﻿@model Gestion_de_Taches.Models.PERSONNE
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Modification de Personne :</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>PERSONNE</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.CIN)
+
+
+        <table>
+            <tr><td>Département :
+</td><td>@Html.DropDownList("ID_DEPARTEMENT", null, htmlAttributes: new { @class = "form-control" })
+@Html.ValidationMessageFor(model => model.ID_DEPARTEMENT, "", new { @class = "text-danger" })</td></tr>
+            <tr><td>Service :
+</td><td>@Html.DropDownList("ID_SERV", null, htmlAttributes: new { @class = "form-control" })
+@Html.ValidationMessageFor(model => model.ID_SERV, "", new { @class = "text-danger" })</td></tr>
+            <tr><td>Nom :
+</td><td>@Html.EditorFor(model => model.NOM, new { htmlAttributes = new { @class = "form-control" } })
+@Html.ValidationMessageFor(model => model.NOM, "", new { @class = "text-danger" })</td></tr>
+            <tr><td>Prénom :
+</td><td>@Html.EditorFor(model => model.PRENOM, new { htmlAttributes = new { @class = "form-control" } })
+@Html.ValidationMessageFor(model => model.PRENOM, "", new { @class = "text-danger" })</td></tr>
+            <tr><td>Age :</td>
+            <td>@Html.EditorFor(model => model.AGE, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.AGE, "", new { @class = "text-danger" })</td></tr>
+            <tr><td>Adresse :
+</td><td>@Html.EditorFor(model => model.ADRESSE, new { htmlAttributes = new { @class = "form-control" } })
+@Html.ValidationMessageFor(model => model.ADRESSE, "", new { @class = "text-danger" })</td></tr>
+            <tr><td>Tel :
+</td><td>@Html.EditorFor(model => model.TEL, new { htmlAttributes = new { @class = "form-control" } })
+@Html.ValidationMessageFor(model => model.TEL, "", new { @class = "text-danger" })</td></tr>
+            <tr><td>Email
+</td><td>@Html.EditorFor(model => model.MAIL, new { htmlAttributes = new { @class = "form-control" } })
+@Html.ValidationMessageFor(model => model.MAIL, "", new { @class = "text-danger" })</td></tr>
+            <tr><td>Date de Naissance :
+</td><td>@Html.EditorFor(model => model.DATE_NAIS, new { htmlAttributes = new { @class = "form-control" } })
+@Html.ValidationMessageFor(model => model.DATE_NAIS, "", new { @class = "text-danger" })</td></tr>
+
+        </table>        
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Modifier" class="btn btn-primary btn-lg" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Retour à la Liste de Personnes", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

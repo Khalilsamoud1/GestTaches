@@ -1,0 +1,26 @@
+﻿@model Gestion_de_Taches.Models.SERVICE
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Affichage de Service</h2>
+
+<div>
+    <h4>SERVICE</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+Nom de Service:        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NOM_SERVICE)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Modifier", "Edit", new { id = Model.ID_SERV }) |
+    @Html.ActionLink("Retour à la Liste de Services", "Index")
+</p>

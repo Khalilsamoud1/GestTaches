@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Gestion_de_Taches.Models.SERVICE>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<table><tr><td><img src="~/images/record_512.png" /></td><td><h2>Gestion de Services</h2></td></tr></table>
+
+
+
+<p>
+    @Html.ActionLink("Nouveau Service", "Create")
+</p>
+<table class="table">
+    <tr style="background-color:black;color:white;">
+        <th>
+            Service
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NOM_SERVICE)
+        </td>
+        <td>
+            @Html.ActionLink("Modifier", "Edit", new { id=item.ID_SERV }) |
+            @Html.ActionLink("Afficher", "Details", new { id=item.ID_SERV }) |
+            @Html.ActionLink("Supprimer", "Delete", new { id=item.ID_SERV })
+        </td>
+    </tr>
+}
+
+</table>

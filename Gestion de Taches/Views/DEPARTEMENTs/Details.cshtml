@@ -1,0 +1,27 @@
+﻿@model Gestion_de_Taches.Models.DEPARTEMENT
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Affichage de Département :</h2>
+
+<div>
+    <h4>DEPARTEMENT</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Nom de Département :
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NOM_DEPARTEMENT)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Modifier", "Edit", new { id = Model.ID_DEPARTEMENT }) |
+    @Html.ActionLink("Retour à la Liste de Dépatrements", "Index")
+</p>

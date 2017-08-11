@@ -1,0 +1,80 @@
+﻿@model IEnumerable<Gestion_de_Taches.Models.PERSONNE>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<table><tr><td><img src="~/images/fournisseur.png" /></td><td><h2>Gestion de Personnes</h2></td></tr></table>
+
+
+
+<p>
+    @Html.ActionLink("Nouvelle Personne", "Create")
+</p>
+<table class="table">
+    <tr style="background-color:black;color:white;">
+        <th>
+            Nom
+        </th>
+        <th>
+            Prénom
+        </th>
+        <th>
+            Age
+        </th>
+        <th>
+           Adresse
+                </th>
+        <th>
+            Tel
+        </th>
+        <th>
+           Email
+        </th>
+        <th>
+Date de Naissance        </th>
+        <th>
+Département        </th>
+        <th>
+Service        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NOM)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PRENOM)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AGE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ADRESSE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TEL)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MAIL)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DATE_NAIS)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DEPARTEMENT.NOM_DEPARTEMENT)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SERVICE.NOM_SERVICE)
+        </td>
+        <td>
+            @Html.ActionLink("Modifier", "Edit", new { id=item.CIN }) |
+            @Html.ActionLink("Afficher", "Details", new { id=item.CIN }) |
+            @Html.ActionLink("Supprimer", "Delete", new { id=item.CIN })
+        </td>
+    </tr>
+}
+
+</table>

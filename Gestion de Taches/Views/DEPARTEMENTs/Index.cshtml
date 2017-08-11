@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Gestion_de_Taches.Models.DEPARTEMENT>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table><tr><td><img src="~/images/add stock.png" /></td><td><h2>Gestion de Départements</h2></td></tr></table>
+
+
+<p>
+    @Html.ActionLink("Nouveau Département", "Create")
+</p>
+<table class="table">
+    <tr style="background-color:black;color:white;">
+        <th>
+Nom de Département:        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NOM_DEPARTEMENT)
+        </td>
+        <td>
+            @Html.ActionLink("Modifier", "Edit", new { id=item.ID_DEPARTEMENT }) |
+            @Html.ActionLink("Afficher", "Details", new { id=item.ID_DEPARTEMENT }) |
+            @Html.ActionLink("Supprimer", "Delete", new { id=item.ID_DEPARTEMENT })
+        </td>
+    </tr>
+}
+
+</table>

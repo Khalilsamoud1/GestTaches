@@ -1,0 +1,35 @@
+﻿@model Gestion_de_Taches.Models.PERSONNE
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Suppression de Personne :</h2>
+
+<h3>Supprimer Cette Personne ?</h3>
+<div>
+    <h4>PERSONNE</h4>
+    <hr />
+
+    <table>
+        <tr><td>Nom :</td><td>@Html.DisplayFor(model => model.NOM)</td></tr>
+        <tr><td>Prénom :</td><td>@Html.DisplayFor(model => model.PRENOM)</td></tr>
+        <tr><td>Age :</td><td>@Html.DisplayFor(model => model.AGE)</td></tr>
+        <tr><td>Adresse :</td><td>@Html.DisplayFor(model => model.ADRESSE)</td></tr>
+        <tr><td>Tel :</td><td>@Html.DisplayFor(model => model.TEL)</td></tr>
+        <tr><td>Email :</td><td>@Html.DisplayFor(model => model.MAIL)</td></tr>
+        <tr><td>Date de Naissance :</td><td>@Html.DisplayFor(model => model.DATE_NAIS)</td></tr>
+        <tr><td>Département :</td><td>@Html.DisplayFor(model => model.DEPARTEMENT.NOM_DEPARTEMENT)</td></tr>
+        <tr><td>Service :</td><td>@Html.DisplayFor(model => model.SERVICE.NOM_SERVICE)</td></tr>
+    
+   </table>
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Supprimer" class="btn btn-primary btn-lg" /> |
+            @Html.ActionLink("Retour à la Liste de Personnes", "Index")
+        </div>
+    }
+</div>

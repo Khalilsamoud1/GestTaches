@@ -1,0 +1,33 @@
+﻿@model Gestion_de_Taches.Models.SERVICE
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Suppression de Service</h2>
+
+<h3>Supprimer cette Service ?</h3>
+<div>
+    <h4>SERVICE</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+           Nom de Service :
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NOM_SERVICE)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Supprimer" class="btn btn-primary btn-lg" /> |
+            @Html.ActionLink("Retour à la Liste de Services", "Index")
+        </div>
+    }
+</div>
